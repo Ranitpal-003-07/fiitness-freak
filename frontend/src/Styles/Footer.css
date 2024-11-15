@@ -1,0 +1,227 @@
+/* General Footer Styling */
+.footer {
+    padding: 0.3rem;
+    padding-bottom: 0;
+    background-color: rgb(0, 0, 0);
+}
+.footer_main {
+    display: flex;
+    width: auto;
+    height: 170px;
+    background-image: url("../assets/dark-theme1.jpg");
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border-radius: 3rem 3rem 0rem 0rem;
+}
+
+.footer_left {
+    width: 40%;
+    text-align: center;
+    justify-content: center;
+    border-radius: 4rem 0rem 0rem 4rem;
+}
+
+.logo {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logo svg {
+    height: 2.6rem;
+    width: 5rem;
+}
+
+.logo p {
+    margin-top: .5rem;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: azure;
+    text-decoration: underline;
+}
+
+.add {
+    margin-top: 1rem;
+    width: 100%;
+    color: rgb(222, 255, 248);
+}
+
+.add p {
+    font-weight: 900;
+    width: 18rem;
+    margin: auto;
+    font-size: .9rem;
+}
+
+.footer_right {
+    background-color: rgba(240, 248, 255, 0.144);
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.twen {
+    width: 100%;
+    color: rgb(250, 241, 254);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.twen p {
+    margin: .2rem;
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.border {
+    display: flex;
+    background-color: rgb(114, 62, 159);
+    width: 100%;
+    justify-content: center;
+    border-radius: 0rem 0rem 3rem 3rem;
+    border-color: rgb(114, 62, 159);
+}
+
+.border .icons {
+    display: flex;
+    margin: .3rem;
+    gap: .1rem;
+}
+
+.icons svg {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.border .copyr {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.border .arrow {
+    width: 1rem ;
+    height: 1rem;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small screens (Mobile) */
+@media (max-width: 767px) {
+    .footer_main {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .footer_left {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-radius: 0;
+    }
+
+    .footer_right {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .twen {
+        text-align: left;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .twen p {
+        font-size: 0.85rem;
+    }
+
+    .border .copyr {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .icons svg {
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+/* For tablets (Medium screens) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .footer_main {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .footer_left {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-radius: 0;
+    }
+
+    .footer_right {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .twen {
+        text-align: left;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .twen p {
+        font-size: 0.95rem;
+    }
+
+    .border .copyr {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+
+    .icons svg {
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+}
+
+/* For large screens (Desktop) */
+@media (min-width: 1025px) {
+    .footer_main {
+        flex-direction: row;
+        height: 170px;
+    }
+
+    .footer_left {
+        width: 40%;
+        margin: 0;
+        border-radius: 4rem 0rem 0rem 4rem;
+    }
+
+    .footer_right {
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .twen {
+        width: auto;
+    }
+
+    .border .copyr {
+        font-size: 1rem;
+    }
+
+    .icons svg {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+}
