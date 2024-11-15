@@ -46,7 +46,7 @@ const Navbar = () => {
             About Us
           </NavLink>
           <NavLink to="/ContactUs" className="nav-link">
-            Contact Us
+            Programs
           </NavLink>
         </div>
 

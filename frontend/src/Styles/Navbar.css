@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     padding: .2rem .2rem;
-    background-color: #fffcf0a3;
+    background-color: #edddff8b;
     backdrop-filter: blur(30px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 50;
@@ -24,16 +24,16 @@
 
 /* Link styling */
 .nav-link {
-    color: #ffffff;
+    color: #000060;
     font-size: 1.12rem;
-    font-weight: 500;
+    font-weight: 700;
     padding: 0.5rem 1rem;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #d9d9ff;
+    color: aliceblue;
     font-weight: 900;
 }
 
