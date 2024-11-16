@@ -1,0 +1,101 @@
+/* Container */
+.features-container {
+    margin-top: 4rem;
+    background:linear-gradient(rgb(83, 50, 50),rgb(90, 80, 80),rgb(37, 34, 34),black);
+    min-height: 100vh;
+    padding: 3rem 0;
+  }
+  
+  .features-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  
+  .features-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #ecdbff;
+    font-weight: 900;
+
+  }
+  
+  .feature-letter {
+    display: inline-block;
+  }
+  
+  /* Feature Card */
+  .feature-card {
+    background-color: #e9fffc3c;
+    text-align: center;
+    border-radius: 1rem;
+    box-shadow: 3px 6px 6px -1px rgba(239, 219, 251, 0.896);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    box-shadow: 3px 10px 10px -1px rgba(239, 219, 251, 0.896);
+  }
+  
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 1rem 0;
+    color: #dae6ff;
+  }
+  
+  .feature-description {
+    color: beige;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .feature-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8d8d88d;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feature-link:hover {
+    background: linear-gradient(to right,rgb(67, 1, 235),rgb(145, 126, 255),rgb(164, 164, 255),rgb(202, 202, 255),lavender,rgb(239, 239, 255));
+    cursor: poinetr;
+    box-shadow: 5px 5px 8px -1px rgb(232, 226, 255);
+    font-weight: 900;
+  }
+  
+  .arrow-icon {
+    margin-left: 0.5rem;
+  }
+  
+  /* Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  

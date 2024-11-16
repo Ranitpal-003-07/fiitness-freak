@@ -2,13 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
-
-
+import "../Styles/Features.css";
 
 const FeatureCard = ({ title, description, link }) => {
   return (
     <motion.div 
-      className="bg-white text-center rounded-lg shadow-lg p-6 mb-6 flex flex-col items-center justify-between h-full hover:shadow-xl transition-shadow duration-300"
+      className="feature-card"
       whileHover={{ y: -5, scale: 1.02 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -16,7 +15,7 @@ const FeatureCard = ({ title, description, link }) => {
     >
       <div>
         <motion.h3 
-          className="text-xl font-semibold text-center mt-3 mb-4 text-blue-600"
+          className="feature-title"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -24,7 +23,7 @@ const FeatureCard = ({ title, description, link }) => {
           {title}
         </motion.h3>
         <motion.p 
-          className="text-gray-600 mb-6"
+          className="feature-description"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -36,17 +35,14 @@ const FeatureCard = ({ title, description, link }) => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Link
-          to={link}
-          className="group flex items-center bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors duration-300"
-        >
+        <Link to={link} className="feature-link">
           Learn More
           <motion.span
             initial={{ x: 0 }}
             animate={{ x: 5 }}
             transition={{ repeat: Infinity, duration: 0.8, repeatType: "reverse" }}
           >
-            <FaArrowRight className="ml-2" />
+            <FaArrowRight className="arrow-icon" />
           </motion.span>
         </Link>
       </motion.div>
@@ -116,7 +112,6 @@ const Features = () => {
     }
   };
 
-  // New animation for the title letters
   const letterVariants = {
     hover: {
       scale: 1.3,
@@ -128,32 +123,31 @@ const Features = () => {
 
   return (
     <motion.div 
-      className="bg-gray-100 min-h-screen py-12"
+      className="features-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="features-wrapper">
         <motion.h2 
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-700"
+          className="features-title"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          {/* Wrap each letter in a motion.span */}
-          {"App Features".split('').map((letter, index) => (
+          {"App Features".split("").map((letter, index) => (
             <motion.span
               key={index}
               variants={letterVariants}
               whileHover="hover"
-              style={{ display: 'inline-block' }}
+              className="feature-letter"
             >
               {letter}
             </motion.span>
           ))}
         </motion.h2>
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="features-grid"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

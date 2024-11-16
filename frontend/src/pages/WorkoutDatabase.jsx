@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../Styles/workout.css"; // Import external CSS
 
 const WorkoutDatabase = () => {
   const [isExercise, setIsExercise] = useState("");
   const [exercises, setExercises] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSelectChange = (event) => {
-    setIsExercise(event.target.value); // Update state with selected value
+    setIsExercise(event.target.value); // Update selected body part
   };
 
   const handleSearch = async () => {
-    if (!isExercise) return; // Prevent searching if no muscle group is selected
+    if (!isExercise) return;
 
-    setIsLoading(true); // Set loading to true
+    setIsLoading(true);
     const options = {
       method: "GET",
       url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${isExercise}`,
@@ -26,25 +27,22 @@ const WorkoutDatabase = () => {
     try {
       const response = await axios.request(options);
       setExercises(response.data);
-      
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching exercises:", error);
     } finally {
-      setIsLoading(false); // Set loading to false after the request completes
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center min-h-[60vh] gap-10 my-12">
-      <div className="w-full flex flex-col justify-center items-center gap-6">
-        <h1 className="text-5xl font-bold text-center">
-          Search For A Perfect Exercise
-        </h1>
-        <div className="flex gap-4 items-center justify-center">
+    <div className="container">
+      <div className="search-container">
+        <h1 className="title">Search For A Perfect Exercise</h1>
+        <div className="search-bar">
           <select
             value={isExercise}
             onChange={handleSelectChange}
-            className="py-3 px-5 appearance-none border border-gray-400 rounded-md text-xl focus:border-gray-400"
+            className="dropdown"
           >
             <option value="">Select a Muscle Group</option>
             <option value="back">Back</option>
@@ -58,40 +56,30 @@ const WorkoutDatabase = () => {
             <option value="upper%20legs">Upper Legs</option>
             <option value="waist">Waist</option>
           </select>
-          <button
-            onClick={handleSearch}
-            className="bg-green-600 rounded-md py-3 px-4 text-xl text-white hover:bg-green-500"
-          >
+          <button onClick={handleSearch} className="search-button">
             Search
           </button>
         </div>
-        {/* Loading indicator */}
         {isLoading ? (
-          <p>Loading exercises...</p>
+          <p className="loading-text">Loading exercises...</p>
         ) : exercises.length === 0 ? (
-          <p>Exercises and demonstrations will be displayed here.</p>
+          <p className="placeholder-text">
+            Exercises and demonstrations will be displayed here.
+          </p>
         ) : null}
       </div>
-      <div className="w-full">
-        {exercises && (
-          <div className="flex w-full flex-wrap items-center justify-center text-center whitespace-nowrap gap-6">
-            {exercises.map((exercise) => (
-              <div
-                key={exercise.id}
-                className="flex flex-col items-center text-center pt-10 rounded-xl gap-4 bg-gray-200 w-72 min-h-96"
-              >
-                <img
-                  src={exercise?.gifUrl}
-                  alt={exercise.name}
-                  className="max-h-64"
-                />
-                <h3 className="text-wrap capitalize w-[80%] font-semibold">
-                  {exercise?.name}
-                </h3>
-              </div>
-            ))}
-          </div>
-        )}
+      <div className="exercise-list">
+        {exercises &&
+          exercises.map((exercise) => (
+            <div key={exercise.id} className="exercise-card">
+              <img
+                src={exercise?.gifUrl}
+                alt={exercise.name}
+                className="exercise-image"
+              />
+              <h3 className="exercise-name">{exercise?.name}</h3>
+            </div>
+          ))}
       </div>
     </div>
   );

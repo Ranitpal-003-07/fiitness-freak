@@ -3,20 +3,18 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const verificationEmail = require("../emailTemplates/verificationEmail");
-const util = require("util");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
     // Check if user already exists
-    const userExists = await User.findOne({ email,isVerified: true });
-    const userNotVerified = await User.findOne({ email,isVerified: false });
-    if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-    if (userNotVerified) {
-      await userNotVerified.deleteOne();
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      if (existingUser.isVerified) {
+        return res.status(400).json({ message: "User already exists." });
+      }
+      await existingUser.deleteOne(); // Remove unverified user record
     }
 
     // Hash the password
@@ -27,7 +25,7 @@ const registerUser = async (req, res) => {
       expiresIn: "1h",
     });
 
-    // Create a transporter object
+    // Configure nodemailer
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -36,9 +34,8 @@ const registerUser = async (req, res) => {
       },
     });
 
-    // Send verification email
+    // Prepare email content
     const emailContent = verificationEmail(name, verificationToken);
-
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
@@ -46,21 +43,16 @@ const registerUser = async (req, res) => {
       html: emailContent,
     };
 
-    // Use promisify to convert sendMail to a promise-based function
-    const sendMailPromise = util.promisify(transporter.sendMail).bind(transporter);
+    // Send the verification email
+    await transporter.sendMail(mailOptions);
 
-    // Send the email
-    await sendMailPromise(mailOptions);
-
-    // If email sent successfully, create the user in the database
+    // Save user to database
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
       verificationToken,
     });
-
-    await user.save();
 
     res.status(201).json({
       message: "User registered. Please check your email to verify your account.",
@@ -75,27 +67,22 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
     const user = await User.findOne({ email });
 
-    // Check if user exists and password matches
-    if (user && (await bcrypt.compare(password, user.password))) {
-      if (!user.isVerified) {
-        return res.status(400).json({ message: "Email not verified" });
-      }
-
-      // Generate a JWT token
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
-      });
-
-      return res.status(200).json({ token });
-    } else {
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ message: "Invalid credentials." });
     }
+
+    if (!user.isVerified) {
+      return res.status(400).json({ message: "Email not verified. Please verify your email." });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+
+    res.status(200).json({ token });
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Server error. Please try again later." });
   }
 };
 
@@ -103,82 +90,68 @@ const verifyEmail = async (req, res) => {
   const { token } = req.params;
 
   try {
-    // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({
-      email: decoded.email,
-      verificationToken: token,
-    });
+    const user = await User.findOne({ email: decoded.email, verificationToken: token });
 
-    if (user) {
-      user.isVerified = true;
-      user.verificationToken = null; // Clear the token after verification
-      await user.save();
-      res.status(200).json({ message: "Email verified successfully" });
-    } else {
-      res.status(400).json({ message: "Invalid verification link" });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid verification link or user not found." });
     }
+
+    user.isVerified = true;
+    user.verificationToken = null;
+    await user.save();
+
+    res.status(200).json({ message: "Email verified successfully." });
   } catch (error) {
     console.error("Error verifying email:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Verification link expired or invalid." });
   }
 };
 
 const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select("-password"); // Exclude password field
+    const user = await User.findById(req.params.id).select("-password");
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found." });
     }
-    res.json(user);
+    res.status(200).json(user);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Error fetching user by ID:", error);
+    res.status(500).json({ message: "Server error." });
   }
 };
 
 const updateProfile = async (req, res) => {
+  const { email, name, password, height, weight, gender, age } = req.body;
+
   try {
-    
-
-    const { email, name, password, height, weight, gender, age } = req.body;
     const user = await User.findOne({ email });
-
     if (!user) {
-      
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found." });
     }
 
+    // Update user details
     user.name = name || user.name;
     user.height = height || user.height;
     user.weight = weight || user.weight;
     user.gender = gender || user.gender;
     user.age = age || user.age;
 
+    // Update profile image if provided
     if (req.file) {
-      user.profileImage = `/uploads/${req.file.filename.replace(/\\/g, '/')}`;
-      
+      user.profileImage = `/uploads/${req.file.filename.replace(/\\/g, "/")}`;
     }
 
+    // Hash and update password if provided
     if (password) {
       user.password = await bcrypt.hash(password, 10);
     }
 
     const updatedUser = await user.save();
-
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      profileImage: updatedUser.profileImage,
-      height: updatedUser.height,
-      weight: updatedUser.weight,
-      gender: updatedUser.gender,
-      age: updatedUser.age,
-    });
+    res.status(200).json(updatedUser);
   } catch (error) {
-    console.error('Error updating profile:', error);
-    res.status(500).json({ message: 'Error updating profile', error: error.message });
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Error updating profile." });
   }
 };
 
@@ -186,7 +159,6 @@ const contactUs = async (req, res) => {
   const { name, email, message } = req.body;
 
   try {
-    // Create a transporter object
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -195,32 +167,24 @@ const contactUs = async (req, res) => {
       },
     });
 
-    // Email content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ftracker60@gmail.com", // The email address you want to receive contact form submissions
+      to: "ranitpal699@gmail.com",
       subject: "New Contact Form Submission",
       html: `
-        <h1>New Contact Form Submission</h1>
+        <h1>Contact Form Submission</h1>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong> ${message}</p>
       `,
     };
 
-    // Send email
     await transporter.sendMail(mailOptions);
 
-    res
-      .status(200)
-      .json({ message: "Your message has been sent successfully!" });
+    res.status(200).json({ message: "Message sent successfully!" });
   } catch (error) {
-    console.error("Error sending contact form email:", error);
-    res
-      .status(500)
-      .json({
-        message: "Failed to send your message. Please try again later.",
-      });
+    console.error("Error sending contact form message:", error);
+    res.status(500).json({ message: "Failed to send the message. Please try again later." });
   }
 };
 

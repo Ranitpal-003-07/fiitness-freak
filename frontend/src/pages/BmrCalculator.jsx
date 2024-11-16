@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../Styles/BmrCal.css'; // Import the external CSS file
 
 const BmrCalculator = () => {
   const [age, setAge] = useState("");
@@ -9,6 +10,7 @@ const BmrCalculator = () => {
     deficit: "",
     maintenance: "",
     bulking: "",
+    bmi: "", // Add BMI state
   });
 
   const calculateBMR = () => {
@@ -36,34 +38,39 @@ const BmrCalculator = () => {
     const deficitCalories = maintenanceCalories - 500;
     const bulkingCalories = maintenanceCalories + 500;
 
+    // Calculate BMI
+    const heightInM = heightInCm / 100; // Convert height from cm to meters
+    const bmi = weightInKg / (heightInM * heightInM);
+    
     setCalories({
       deficit: Math.round(deficitCalories),
       maintenance: Math.round(maintenanceCalories),
       bulking: Math.round(bulkingCalories),
+      bmi: bmi.toFixed(2), // Set the calculated BMI with 2 decimal places
     });
   };
 
   return (
-    <div className="flex justify-center items-center my-10 bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">BMR Calculator</h1>
-        <div className="space-y-4">
+    <div className="bmr-calculator">
+      <div className="bmr-calculator-container">
+        <h1 className="bmr-title">BMR Calculator</h1>
+        <div className="bmr-form">
           <div>
-            <label className="block text-gray-700">Age:</label>
+            <label className="bmr-label">Age:</label>
             <input
               type="number"
               value={age}
               onChange={(e) => setAge(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="bmr-input"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700">Gender:</label>
+            <label className="bmr-label">Gender:</label>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="bmr-input"
             >
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -71,51 +78,55 @@ const BmrCalculator = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700">Weight (kg):</label>
+            <label className="bmr-label">Weight (kg):</label>
             <input
               type="number"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="bmr-input"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700">Height (cm):</label>
+            <label className="bmr-label">Height (cm):</label>
             <input
               type="number"
               value={height}
               onChange={(e) => setHeight(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="bmr-input"
             />
           </div>
 
           <button
             onClick={calculateBMR}
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+            className="bmr-button"
           >
             Calculate Calories
           </button>
 
-          <table className="w-full mt-6 table-auto">
+          <table className="bmr-table">
             <thead>
               <tr>
-                <th className="border px-4 py-2 text-left">Calorie Type</th>
-                <th className="border px-4 py-2 text-left">Calories</th>
+                <th className="bmr-table-header">Calorie Type</th>
+                <th className="bmr-table-header">Calories</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border px-4 py-2">Deficit</td>
-                <td className="border px-4 py-2">{calories.deficit}</td>
+                <td className="bmr-table-cell">Deficit</td>
+                <td className="bmr-table-cell">{calories.deficit}</td>
               </tr>
               <tr>
-                <td className="border px-4 py-2">Maintenance</td>
-                <td className="border px-4 py-2">{calories.maintenance}</td>
+                <td className="bmr-table-cell">Maintenance</td>
+                <td className="bmr-table-cell">{calories.maintenance}</td>
               </tr>
               <tr>
-                <td className="border px-4 py-2">Bulking</td>
-                <td className="border px-4 py-2">{calories.bulking}</td>
+                <td className="bmr-table-cell">Bulking</td>
+                <td className="bmr-table-cell">{calories.bulking}</td>
+              </tr>
+              <tr>
+                <td className="bmr-table-cell">BMI</td>
+                <td className="bmr-table-cell">{calories.bmi}</td>
               </tr>
             </tbody>
           </table>

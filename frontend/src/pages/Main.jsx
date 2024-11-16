@@ -1,6 +1,5 @@
 import React from "react";
 import Lottie from "lottie-react";
-// import banner from "../assets/banner.png"; // Remove this line
 import bannerAnimation from "../assets/banner-animation.json"; // Add this line
 import bannerAnimation2 from "../assets/banner-animation2.json";
 import { Link } from "react-router-dom";

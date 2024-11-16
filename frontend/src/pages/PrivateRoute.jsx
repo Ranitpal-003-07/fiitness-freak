@@ -1,12 +1,16 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // Your auth context
+import { useAuth } from "../context/AuthContext";
 
-const PrivateRoute = () => {
-  const { isAuthenticated } = useAuth(); // Get the auth status from context
+const PrivateRoute = ({ redirectPath = "/SignIn" }) => {
+  const { isAuthenticated, isLoading } = useAuth(); 
 
-  // If the user is not authenticated, redirect to SignIn
-  return isAuthenticated ? <Outlet /> : <Navigate to="/SignIn" />;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  
+  return isAuthenticated ? <Outlet /> : <Navigate to={redirectPath} replace />;
 };
 
 export default PrivateRoute;
