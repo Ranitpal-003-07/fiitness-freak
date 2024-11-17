@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Hamburger from "hamburger-react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -31,7 +30,6 @@ const Navbar = () => {
       {/* Navbar */}
       <div className="navbar-content">
         <div>
-          <img src="/FitnessAppLogo.png" className="w-16 border border-gray-400 rounded-full" alt="Logo" />
         </div>
 
         {/* Desktop Menu */}
@@ -51,7 +49,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden">
+        <div className="hamburger-menu">
           <button
             onClick={toggleMenu}
             className="scale-75 border border-slate-600 rounded-md focus:outline-none"

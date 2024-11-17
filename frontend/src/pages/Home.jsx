@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-
-// Public Components
 import Features from "./Features";
 import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs";
@@ -12,20 +10,15 @@ import WorkoutDatabase from "./WorkoutDatabase";
 import NutritionChecker from "./NutritionChecker";
 import BmrCalculator from "./BmrCalculator";
 import VerifyEmail from "./VerifyEmail";
-
-// Private Components
-import ProfileLayout from "./ProfileLayout";
-import MealPlan from "./MealPlan";
-import WaterIntake from "./WaterIntake";
+import ProfileLayout from "./ProfileLayout"; // Layout for private routes
+import MealPlan from "./MealPlan"; // Private Route Example
+import WaterIntake from "./WaterIntake"; // Private Route Example
+import PrivateRoute from "./PrivateRoute"; // Import the PrivateRoute component
+import { useAuth } from "../context/AuthContext";
 import UpdateProfile from "./UpdateProfile";
 import WorkoutDetails from "./WorkoutDetails";
-import PrivateRoute from "./PrivateRoute";
-
-// Context
-import { useAuth } from "../context/AuthContext";
-
 const Home = () => {
-  const { isAuthenticated } = useAuth(); // Access authentication status
+  const { isAuthenticated } = useAuth(); // Get the authentication status
 
   return (
     <div className="min-h-[90vh] relative">
@@ -38,35 +31,28 @@ const Home = () => {
         <Route path="/WorkoutDatabase" element={<WorkoutDatabase />} />
         <Route path="/NutritionChecker" element={<NutritionChecker />} />
         <Route path="/BmrCalculator" element={<BmrCalculator />} />
+        
 
         {/* Auth Routes */}
         <Route
           path="/SignIn"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <SignIn />}
+          element={isAuthenticated ? <Navigate to="/" /> : <SignIn />}
         />
         <Route
           path="/Register"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <Register />}
+          element={isAuthenticated ? <Navigate to="/" /> : <Register />}
         />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
         {/* Private Routes */}
-        <Route
-          path="/profile/*"
-          element={
-            <PrivateRoute>
-              <ProfileLayout />
-            </PrivateRoute>
-          }
-        >
-          <Route path="update-profile" element={<UpdateProfile />} />
-          <Route path="workout-details" element={<WorkoutDetails />} />
-          <Route path="meal-plan" element={<MealPlan />} />
-          <Route path="water-intake" element={<WaterIntake />} />
+        <Route path="/profile" element={<PrivateRoute />}>
+          <Route element={<ProfileLayout />}>
+            <Route path="update-profile" element={<UpdateProfile />} />
+            <Route path="workout-details" element={<WorkoutDetails />} />
+            <Route path="meal-plan" element={<MealPlan />} />
+            <Route path="water-intake" element={<WaterIntake />} />
+          </Route>
         </Route>
-
-        {/* Fallback Route */}
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );

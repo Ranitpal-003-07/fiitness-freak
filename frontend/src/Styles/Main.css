@@ -1,0 +1,237 @@
+.hero{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    background:linear-gradient(black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+}
+
+.left-h{
+    padding: 2rem;
+    padding-top: 1.5rem;
+    flex: 3;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.right-h{
+    flex: 1;
+    position: relative;
+    background-color:rgb(202, 202, 249);
+    padding-top: 2rem;
+}
+
+.the-best-ad{
+    margin-top: 4rem;
+    background-color: #e8e8e851;
+    border-radius: 4rem;
+    width: fit-content;
+    padding: 20px 18px;
+    text-transform: uppercase;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.the-best-ad>span{
+    z-index: 2;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.the-best-ad>div{
+    position: absolute;
+    background-color: rgb(159, 159, 242);
+    width: 5.8rem;
+    height: 80%;
+    left: 8px;
+    border-radius: 3rem;
+    z-index: 1;
+}
+
+.hero-text{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-transform: uppercase;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: white;
+    text-overflow: inherit;
+}
+
+.stroke-text{
+    color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+}
+
+.hero-text>div:nth-of-type(3){
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 1px;
+    width: 70%;
+}
+
+.figures{
+    display: flex;
+    gap: 2rem;
+}
+
+.figures>div{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(240, 248, 255, 0.257);
+    padding: .5rem;
+    border-radius: 1rem;
+    box-shadow: 2px 6px 6px -1px rgba(255, 240, 245, 0.331);
+}
+.figures>div:hover{
+    background-color:rgb(134, 134, 224);
+}
+
+.figures>div>span:nth-of-type(1){
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.figures>div>span:nth-of-type(2){
+    color: lavender;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.btn{
+    background-color: white;
+    padding: .5rem;
+    font-weight: 900;
+    border: 4px solid transparent;
+    transition: 300ms all;
+    align-items: center;
+    justify-content: center;
+    border-radius: .2rem;
+}
+
+.hero-btns{
+    display: flex;
+    gap: 1rem;
+    font-weight: normal;
+}
+
+.hero-btns>:nth-child(1){
+    color: white;
+    background-color: rgb(107, 107, 224);
+    width: 8rem;
+}
+
+.hero-btns>:nth-child(2){
+    color: white;
+    background-color: transparent;
+    width: 8rem;
+    border: 2px solid rgb(107, 107, 224);
+}
+
+
+.right-h>.btn{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: black;
+}
+.heart-rate{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background:linear-gradient(black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+    width: fit-content;
+    padding: 1rem;
+    align-items: start;
+    border-radius: 5px;
+    position: absolute;
+    right: 4rem;
+    top: 6rem;
+}
+
+.heart-rate>:nth-child(2){
+    color: rgb(208, 174, 242);
+    font-weight: 600;
+}
+.heart-rate>:nth-child(3){
+    color: rgb(238, 143, 175);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.heart-rate>img{
+    width: 2rem;
+}
+
+.hero-image{
+    position: absolute;
+    top: 10rem;
+    right: 8rem;
+    width: 23rem;
+}
+
+.hero-image-back{
+    position: absolute;
+    top: 4rem;
+    right: 20rem;
+    width: 15rem;
+}
+
+.calories{
+    display: flex;
+    gap: 1.5rem;
+    background:linear-gradient(black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+    border-radius: 5px;
+    padding: 1rem;
+    width: 11rem;
+    position: absolute;
+    top: 32rem;
+    right: 28rem;
+    box-shadow: 3px 8px 8px -1px lavenderblush;
+}
+
+.calories>img{
+    width: 3rem;
+}
+
+.calories>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calories>div>:nth-child(1){
+    color: rgb(208, 174, 242);
+    font-size: .8rem;
+    font-weight: 600;
+}
+.calories>div>:nth-child(2){
+    color: rgb(238, 143, 175);
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.programs{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.programs-header{
+    display: flex;
+    gap: 5rem;
+    font-weight: 900;
+    font-size: 3rem;
+    justify-content: center;
+    color: white;
+    text-transform: uppercase;
+}
