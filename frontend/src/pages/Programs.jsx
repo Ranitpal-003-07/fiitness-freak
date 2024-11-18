@@ -24,7 +24,7 @@ import whiteTick from '../assets/whiteTick.png'
 
 
 
-const ContactUs = () => {
+const Programs = () => {
  
   return (
    <>
@@ -258,4 +258,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default Programs;

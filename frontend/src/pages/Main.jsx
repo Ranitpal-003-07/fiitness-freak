@@ -76,6 +76,7 @@ const Main = () => {
           </div>
         </div>
 
+      </div>
       <div className="programs">
         <div className="programs-header">
           <span>Explore Our</span>
@@ -83,7 +84,6 @@ const Main = () => {
           <span>To Shape You</span>
         </div>
       </div>      
-      </div>
    </>
   );
 };
