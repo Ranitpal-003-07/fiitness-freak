@@ -14,11 +14,27 @@ import leftArrow from '../assets/leftArrow.png';
 import rightArrow from '../assets/rightArrow.png';
 
 
-
 const Main = () => {
   const { isAuthenticated } = useAuth();
   const [selected,setSelected]=useState(0);
   const tLength=testimonialsData.length;
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
+        publicKey: 'YOUR_PUBLIC_KEY',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
 
   return (
    <>
@@ -169,8 +185,32 @@ const Main = () => {
         </div>
       </div>
       <div className="join">
-        <div className="left-j"></div>
-        di
+        <div className="ani2">
+        <Lottie
+            animationData={bannerAnimation2}
+            className="animate-slideInFromRight w-[90%]"
+            // Adjust size as needed
+          />
+        </div>
+        <div className="join2">
+        <div className="left-j">
+          <hr />
+          <div>
+            <span className="stroke-text">READY TO</span>
+            <span>LEVEL UP</span>
+          </div>
+          <div>
+            <span>TOUR BODY</span>
+            <span className="stroke-text">WITH US..?</span>
+          </div>
+        </div>
+        <div className="right-j">
+          <form  action="" className="email-container" >
+            <input type="email" placeholder="Enter Your Email" name="user_email" />
+            <button className="email-btn">Join Now</button>
+          </form>
+        </div>
+        </div>
       </div>
    </>
   );
