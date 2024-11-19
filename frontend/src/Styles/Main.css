@@ -220,18 +220,249 @@
 }
 
 .programs{
+    padding-top: 6rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 0 2rem;
 }
 
 .programs-header{
     display: flex;
-    gap: 5rem;
+    gap: 4rem;
     font-weight: 900;
     font-size: 3rem;
     justify-content: center;
     color: white;
     text-transform: uppercase;
 }
+
+.testimonials{
+    padding-top: 6rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    background:linear-gradient(to top,black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+    gap: 1rem;
+
+}
+
+.left-t{
+    display: flex;
+    flex: 1 1;
+    gap: 2rem;
+    flex-direction: column;
+    text-transform: uppercase;
+    color: white;
+}
+
+.left-t>:nth-child(1){
+    color: lavender;
+    font-weight: bold;
+}
+
+.left-t>:nth-child(2),
+.left-t>:nth-child(3){
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.left-t>:nth-child(4){
+    text-transform: none;
+    text-align: justify;
+    color: rgb(165, 165, 255);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 40px;
+}
+
+.right-t{
+    flex: 1;
+    position: relative;
+}
+
+.right-t>img{
+    position: absolute;
+    width: 17rem;
+    height: 20rem;
+    object-fit: cover;
+    right: 8rem;
+    top:2rem;
+}
+
+.right-t>:nth-child(1){
+    position: absolute;
+    width: 17rem;
+    height: 20rem;
+    border: 3px solid rgb(135, 135, 255);
+    background-color: transparent;
+    right: 9rem;
+    top: 0.9rem;
+}
+
+.right-t>:nth-child(2){
+    position: absolute;
+    width: 17rem;
+    height: 19rem;
+    right: 7rem;
+    top: 4rem;
+    background: linear-gradient(to right,rgb(67, 1, 235),rgb(145, 126, 255),rgb(164, 164, 255),rgb(202, 202, 255),lavender,rgb(239, 239, 255));
+}
+
+.arrows{
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 3rem;
+}
+
+.arrows>img{
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.photogal{
+background:linear-gradient(black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+padding-top: 6rem;
+padding-left: 2rem;
+padding-right: 2rem;
+display: flex;
+gap: 1rem;
+
+}
+
+.left-pg {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .left-pg>span {
+    font-size: 5rem;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 2rem;
+    color: lavender;
+    text-align: center;
+  }
+  
+  .album {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .responsive-container-block {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .img-cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .img {
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .img:hover {
+    transform: scale(1.05);
+  }
+  
+  .img-big {
+    width: 100%;
+    height: auto;
+  }
+  
+  .img-last {
+    margin-right: 0;
+  }
+  
+  /* Collage Specific Styling */
+  .bg {
+    gap: 15px;
+  }
+  
+  .img-cont:first-child .img {
+    width: calc(33.33% - 10px);
+  }
+  
+  .img-cont:nth-child(2) .img-big {
+    width: calc(50% - 10px);
+  }
+  
+  .img-cont:nth-child(3) .img {
+    width: calc(33.33% - 10px);
+  }
+
+.right-pg{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(242, 231, 255, 0.352);
+    padding-top: 2rem;
+    align-items: center;
+}
+
+.right-pg>:nth-child(1){
+    font-size: 4rem;
+}
+
+.ani1{
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.cal{
+    background:linear-gradient(black,rgb(37, 34, 34),rgb(90, 80, 80),rgb(83, 50, 50));
+    margin:auto;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+}
+ .cal>img{
+    width: 4.5rem;
+ }
+ .cal>div{
+    margin-left: 3rem;
+    background-color: rgba(255, 240, 245, 0.111);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+ }
+ .cal>div>:nth-child(1){
+    font-size: 1.8rem;
+    color: lavender;
+    font-weight: 700;
+ }
+ .cal>div>:nth-child(2){
+    font-size: 2.2rem;
+    color: orange;
+    font-weight: 900;
+ }
+
+ .intro{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color:rgb(226, 222, 255);
+    margin:2rem;
+    margin-top: 4rem;
+
+ }
+
+
