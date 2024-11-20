@@ -1,106 +1,254 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import '../Styles/Style.css'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useAuth } from "../context/AuthContext";
+
+
 
 const SignIn = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state for button
-  const { login } = useAuth(); // Context hook to manage auth state
-  const navigate = useNavigate(); // React Router hook for navigation
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false); 
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [email2, setEmail2] = useState("");
+  const [password2, setPassword2] = useState("");
+  const { login } = useAuth();
 
-  // Handle form submission
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading state
 
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    setLoading(true); // Start loading
     try {
-      // Send login request
-      const response = await axios.post("/api/users/login", {
+      // Send user registration details
+      const response = await axios.post("/api/users/register", {
+        name,
         email,
         password,
       });
 
-      // Successful login
-      toast.success("Sign in successful");
-      login(response.data.token); // Update auth context with JWT token
-      navigate("/"); // Redirect to homepage
+      navigate("/SignIn");
+      toast.success(
+        "Registration successful! Check your email to verify your account."
+      );
     } catch (error) {
-      // Handle login errors
-      const errorMessage = error.response?.data?.message || "An error occurred";
-      console.error("Error signing in:", errorMessage);
-      toast.error(`Error signing in: ${errorMessage}`);
+      const errorMessage =
+        error.response?.data?.message || "An error occurred during registration.";
+      toast.error(errorMessage);
     } finally {
-      setLoading(false); // Stop loading state
+      setLoading(false); 
+    }
+  };
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    setLoading(true); // Start loading
+    try {
+      const response = await axios.post("/api/users/login", {
+        email2,
+        password2,
+      });
+
+      toast.success("Sign in successful");
+
+      login(response.data.token);
+
+      // Redirect to home page
+      navigate("/");
+    } catch (error) {
+      // Display error toast if login fails
+       const errorMessage = error.response?.data?.message || error.message;
+       console.error("Error signing in:", errorMessage);
+       toast.error(`Error signing in: ${errorMessage}`);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
   return (
-    <div
-      className="flex flex-col xl:flex-row animate-fadeIn justify-center m-auto items-center xl:justify-normal bg-black w-full md:w-[80%] h-[60vh] sm:h-[80vh] bg-cover bg-center rounded-3xl"
-      style={{ backgroundImage: `url('/loginbg1.jpg')` }} // Background image for the component
-    >
-      {/* Sign-in form container */}
-      <div className="text-white md:h-[70%] h-full md:w-[50%] w-full flex bg-[rgba(0,0,0,0.25)] mx-8 rounded-[2.5rem] items-center justify-center flex-col gap-4 p-8">
-        <h2 className="text-5xl xl:text-7xl font-semibold">Sign In</h2>
+   <>
+     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          {/* Sign In Form */}
+          <form onSubmit={handleSubmit2} className="sign-in-form">
+            <h2 className="title">Sign in</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input type="email"
+              value={email2}
+              onChange={(e) => setEmail2(e.target.value)}
+              placeholder="Email"
+              required />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input  type={showPassword ? "text" : "password"}
+              value={password2}
+              placeholder="Password"
+              onChange={(e) => setPassword2(e.target.value)}
+              required />
+               <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="cursor-pointer eye"
+            >
+              {showPassword ? (
+                <FontAwesomeIcon icon={faEyeSlash} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faEye} size="lg" />
+              )}
+            </span>
+            </div>
+            <input type="submit" value={`${loading ? "Signing In..." : "Sign In"}`} className="btn solid" />
+            <p className="social-text">Or Sign in with social platforms</p>
+            <div className="social-media">
+              <a href="#" className="social-icon">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
 
-        {/* Form for user credentials */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full justify-center items-center gap-6 mt-8"
-        >
-          {/* Email input */}
-          <div>
-            <input
-              type="email"
+          <form onSubmit={handleSubmit} className="sign-up-form">
+            <h2 className="title">Sign up</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input type="text" 
+               value={name}
+               onChange={(e) => setName(e.target.value)}
+               placeholder="Name"
+               required />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
+              <input type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
-              className="p-6 bg-slate-900 py-3 text-2xl border-white border md:w-[25vw] w-[60vw] hover:border-orange-400 rounded-full"
-            />
-          </div>
-
-          {/* Password input */}
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="p-6 bg-slate-900 py-3 text-2xl border-white border md:w-[25vw] w-[60vw] hover:border-orange-400 rounded-full"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2"
-            >
-              <FontAwesomeIcon
-                icon={showPassword ? faEyeSlash : faEye}
-                className="text-white"
               />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input
+               type={showPassword ? "text" : "password"}
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+               placeholder="Password"
+               required />
+                <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="cursor-pointer eye"
+            >
+              {showPassword ? (
+                <FontAwesomeIcon icon={faEyeSlash} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faEye} size="lg" />
+              )}
+            </span>
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input
+               type={showConfirmPassword ? "text" : "password"}
+               value={confirmPassword}
+               onChange={(e) => setConfirmPassword(e.target.value)}
+               placeholder="Confirm Password"
+               required
+               />
+               <span
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="cursor-pointer eye"
+            >
+              {showConfirmPassword ? (
+                <FontAwesomeIcon icon={faEyeSlash} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faEye} size="lg" />
+              )}
+            </span>
+            </div>
+            <input type="submit" className="btn" value="Sign up" />
+            <p className="social-text">Or Sign up with social platforms</p>
+            <div className="social-media">
+              <a href="#" className="social-icon">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* Panels */}
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
+            <h3>New here ?</h3>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+              ex ratione. Aliquid!
+            </p>
+            <button
+              className="btn transparent"
+              id="sign-up-btn"
+              onClick={() => setIsSignUpMode(true)}
+            >
+              Sign up
             </button>
           </div>
-
-          {/* Submit button */}
-          <button
-            className={`p-3 text-2xl bg-slate-900 py-3 border-white border hover:border-orange-400 md:w-[15vw] w-[30vw] mt-12 m-auto rounded-full ${
-              loading ? "cursor-not-allowed opacity-50" : ""
-            }`}
-            type="submit"
-            disabled={loading} // Disable button during loading
-          >
-            {loading ? "Signing In..." : "Sign In"} {/* Dynamic button text */}
-          </button>
-        </form>
+          <img src="img/log.svg" className="image" alt="Sign Up" />
+        </div>
+        <div className="panel right-panel">
+          <div className="content">
+            <h3>One of us ?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              laboriosam ad deleniti.
+            </p>
+            <button
+              className="btn transparent"
+              id="sign-in-btn"
+              onClick={() => setIsSignUpMode(false)}
+            >
+              Sign in
+            </button>
+          </div>
+          <img src="img/register.svg" className="image" alt="Sign In" />
+        </div>
       </div>
     </div>
+   </>
   );
 };
 
