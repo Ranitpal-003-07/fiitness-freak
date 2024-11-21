@@ -184,7 +184,7 @@ const Main = () => {
         </span>
         </div>
       </div>
-      <div className="join">
+      <div className="join2">
         <div className="ani2">
         <Lottie
             animationData={bannerAnimation2}
@@ -192,7 +192,7 @@ const Main = () => {
             // Adjust size as needed
           />
         </div>
-        <div className="join2">
+        <div className="join3">
         <div className="left-j">
           <hr />
           <div>
@@ -207,7 +207,7 @@ const Main = () => {
         <div className="right-j">
           <form  action="" className="email-container" >
             <input type="email" placeholder="Enter Your Email" name="user_email" />
-            <button className="email-btn">Join Now</button>
+            <button className="emailbtn">Join Now</button>
           </form>
         </div>
         </div>
