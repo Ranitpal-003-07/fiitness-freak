@@ -18,8 +18,6 @@ const ProfileLayout = () => {
           >
             Update Profile
           </NavLink>
-
-          {/* Workout Details */}
           <NavLink
             to="/profile/workout-details"
             isActive={activeLink === "/profile/workout-details"}
