@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {jwtDecode} from "jwt-decode"; // Default import for decoding JWT
-import axios from "axios"; // For making API calls
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -10,14 +10,24 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null); // Store user details
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("jwttoken");
     if (token) {
-      const decodedToken = jwtDecode(token); // Decode the JWT
-      fetchUser(decodedToken.id); // Fetch user using the decoded id
-      setIsAuthenticated(true);
+      try {
+        const decodedToken = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+        if (decodedToken.exp < currentTime) {
+          logout(); // Log out if token is expired
+        } else {
+          fetchUser(decodedToken.id);
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Failed to decode token or fetch user:", error);
+        logout(); // Logout if there's an error decoding the token
+      }
     }
   }, []);
 
@@ -41,17 +51,18 @@ export const AuthProvider = ({ children }) => {
     try {
       localStorage.setItem("jwttoken", token);
       const decodedToken = jwtDecode(token);
-      await fetchUser(decodedToken.id); // Fetch user using the decoded id
+      await fetchUser(decodedToken.id);
       setIsAuthenticated(true);
     } catch (error) {
       console.error("Failed to log in:", error);
-      logout(); // Log out if login fails
+      toast.error("Login failed. Please try again.");
+      logout();
     }
   };
 
   const logout = () => {
     localStorage.removeItem("jwttoken");
-    setUser(null); // Clear user data
+    setUser(null);
     setIsAuthenticated(false);
   };
 
