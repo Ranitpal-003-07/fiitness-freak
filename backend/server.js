@@ -17,7 +17,7 @@ app.use(express.json());
 // CORS configuration to allow the frontend to access the backend
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL || "https://fiitness-freak.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // Include credentials (e.g., cookies) if used
   })
