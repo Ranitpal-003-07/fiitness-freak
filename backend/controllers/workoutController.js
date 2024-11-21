@@ -82,15 +82,21 @@ const getWorkoutAnalytics = async (req, res) => {
   try {
     const workouts = await Workout.find({ user: userId, exercise }).sort({ date: 1 });
     
-    // Mapping workout analytics with formatted date and detailed sets, reps, and weights
     const analytics = workouts.map(w => ({
-      date: w.date.toISOString().split('T')[0], // Simplified date format
+      date: w.date.toISOString().split('T')[0],
       sets: w.sets,
       repsPerSet: w.repsPerSet,
       weightPerSet: w.weightPerSet,
-      totalReps: w.repsPerSet.reduce((sum, reps) => sum + reps, 0), // Added total reps calculation
-      totalWeight: w.weightPerSet.reduce((sum, weight) => sum + weight, 0), // Added total weight calculation
+      totalReps: w.repsPerSet.reduce((sum, reps) => sum + reps, 0),
+      totalWeight: w.weightPerSet.reduce((sum, weight) => sum + weight, 0),
+      averageWeightPerSet: w.weightPerSet.length
+        ? w.weightPerSet.reduce((sum, weight) => sum + weight, 0) / w.weightPerSet.length
+        : 0,
+      averageRepsPerSet: w.repsPerSet.length
+        ? w.repsPerSet.reduce((sum, reps) => sum + reps, 0) / w.repsPerSet.length
+        : 0,
     }));
+    
 
     res.json(analytics);
   } catch (error) {

@@ -17,7 +17,9 @@ app.use(express.json());
 // CORS configuration to allow the frontend to access the backend
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*", // Allow any origin in development
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Include credentials (e.g., cookies) if used
   })
 );
 

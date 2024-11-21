@@ -1,61 +1,104 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
-const {
-  registerUser,
-  loginUser,
-  verifyEmail,
-  getUserById,
-  updateProfile,
-  contactUs
-} = require("../controllers/userController");
-
 const router = express.Router();
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const protect = require("../middleware/authMiddleware"); // Protect middleware for route protection
 
-// Configure Multer for file upload
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // Ensure the 'uploads' directory exists in your root folder
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    // Generate a unique filename using the current timestamp
-    cb(null, Date.now() + path.extname(file.originalname)); // e.g., 1609459200000.jpg
-  }
-});
+// Register a new user
+router.post("/register", async (req, res) => {
+  const { name, email, password } = req.body;
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limit the file size to 5 MB
-  fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|gif/;
-    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = fileTypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error("Only image files are allowed!"));
+  try {
+    // Check if user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: "User already exists" });
     }
+
+    // Create a new user
+    const user = new User({
+      name,
+      email,
+      password,
+    });
+
+    // Save user to the database
+    await user.save();
+
+    // Return success message
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-// Register route (with email verification)
-router.post("/register", registerUser);
+// Login user
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-// Login route
-router.post("/login", loginUser);
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
 
-// Email verification route
-router.get("/verify-email/:token", verifyEmail);
+    // Compare the password with the stored hash
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
 
-// Get user by ID route
-router.get("/:id", getUserById);
+    // Create a JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
 
-// Update profile route with file upload
-router.put("/update-profile", upload.single('profileImage'), updateProfile);
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
-// Contact us route
-router.post("/contact", contactUs);
+// Get user profile (protected route)
+router.get("/profile", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Update user profile (protected route)
+router.put("/profile", protect, async (req, res) => {
+  const { name, email, height, weight, gender, age, profileImage } = req.body;
+
+  try {
+    // Update user profile
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        name,
+        email,
+        height,
+        weight,
+        gender,
+        age,
+        profileImage,
+      },
+      { new: true }
+    ).select("-password");
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 module.exports = router;

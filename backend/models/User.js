@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      minlength: 8, // Minimum password length
     },
     isVerified: {
       type: Boolean,
@@ -25,6 +26,10 @@ const userSchema = new mongoose.Schema(
     verificationToken: {
       type: String,
       default: null,
+    },
+    verificationTokenExpires: {
+      type: Date,
+      default: Date.now() + 3600000, // Token expiration (1 hour)
     },
     profileImage: {
       type: String,
@@ -46,6 +51,11 @@ const userSchema = new mongoose.Schema(
     age: {
       type: Number,
       default: null,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user", // Default user role
     },
   },
   {
@@ -72,6 +82,17 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// Ensure email is unique
+userSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    const user = await mongoose.model("User").findOne({ email: this.email });
+    if (user) {
+      throw new Error("Email already in use");
+    }
+  }
+  next();
+});
 
 // Create the User model from the schema
 module.exports = mongoose.model("User", userSchema);

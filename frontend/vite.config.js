@@ -8,8 +8,8 @@ export default defineConfig(({ mode }) => {
     server: {
       port: env.VITE_PORT,
       proxy: {
-        "/api": env.REACT_APP_API_URL,
-        "/uploads": env.REACT_APP_API_URL,
+        "/api": env.VITE_API_URL,
+        "/uploads": env.VITE_API_URL,
       },
     },
     optimizeDeps: {
