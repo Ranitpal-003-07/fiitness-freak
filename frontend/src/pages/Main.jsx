@@ -6,7 +6,6 @@ import calories from '../assets/calories.png'
 import Lottie from "lottie-react";
 import bannerAnimation from "../assets/banner-animation.json";
 import bannerAnimation2 from "../assets/banner-animation2.json";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import '../Styles/Main.css'
 import {testimonialsData} from '../Data/TestimonialsData';

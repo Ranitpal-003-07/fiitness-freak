@@ -147,7 +147,7 @@ left: 1rem;
 }
 
 
-@media (max-width: 668px) {
+@media (max-width: 660px) {
   .desktop-links,
   .reglog {
       display: none;

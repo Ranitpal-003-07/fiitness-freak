@@ -7,10 +7,14 @@ import { toast } from "react-toastify";
 import '../Styles/Style.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useAuth } from "../context/AuthContext";
+import bannerAnimation from "../assets/banner-animation.json";
+import bannerAnimation2 from "../assets/banner-animation2.json";
+import Lottie from "lottie-react";
 
 
 
-const Register = () => {
+
+const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,12 +75,11 @@ const Register = () => {
       // Redirect to home page
       navigate("/");
     } catch (error) {
-      // Display error toast if login fails
        const errorMessage = error.response?.data?.message || error.message;
        console.error("Error signing in:", errorMessage);
        toast.error(`Error signing in: ${errorMessage}`);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
@@ -214,6 +217,10 @@ const Register = () => {
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
+          <Lottie
+              animationData={bannerAnimation}
+              style={{margin:"0",padding:"0"}}
+            />
             <h3>New here ?</h3>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
@@ -227,10 +234,13 @@ const Register = () => {
               Sign up
             </button>
           </div>
-          <img src="img/log.svg" className="image" alt="Sign Up" />
         </div>
         <div className="panel right-panel">
           <div className="content">
+          <Lottie
+            animationData={bannerAnimation2}
+            style={{margin:"0",padding:"0"}}
+          />
             <h3>One of us ?</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
@@ -244,7 +254,6 @@ const Register = () => {
               Sign in
             </button>
           </div>
-          <img src="img/register.svg" className="image" alt="Sign In" />
         </div>
       </div>
     </div>
@@ -252,4 +261,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;

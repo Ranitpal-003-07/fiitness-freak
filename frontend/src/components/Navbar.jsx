@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Hamburger from "hamburger-react";
-import { Link, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import NavLink from "../components/NavLink"; // Import NavLink
@@ -57,7 +56,7 @@ const Navbar = () => {
            style={{display:isAuthenticated?"":"none"}}
           >
           <img src="" alt="" className="userimg" />
-          <p className="username">Ranit</p>
+          <p className="username">{isAuthenticated?user.name:"user"}</p>
           </div>
           <NavLink to="/" className="nav-link2" onClick={toggleMenu}>
             Home
