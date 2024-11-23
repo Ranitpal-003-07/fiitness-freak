@@ -1,0 +1,144 @@
+/* General Styles */
+
+  
+  h2 {
+    font-family: 'Poppins', sans-serif;
+    color: #2d3748;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Container */
+  .motion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .form-wrapper {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Form Styling */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+    padding: 14px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #4c51bf;
+    box-shadow: 0 0 10px rgba(76, 81, 191, 0.5);
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  /* Custom Profile Image Input */
+  .profile-image-upload {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .profile-image-upload img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #4c51bf;
+    color: white;
+    font-size: 16px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  input[type="file"]:hover {
+    background-color: #434190;
+  }
+  
+  input[type="file"]:focus {
+    outline: none;
+  }
+  
+  /* Button Styling */
+  button {
+    font-size: 18px;
+    background-color: #4c51bf;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    width: 200px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #434190;
+    transform: translateY(-3px);
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:active {
+    transform: translateY(1px);
+  }
+  
+  /* Form Grid Layout */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .grid-container div {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .form-wrapper {
+      padding: 20px;
+    }
+  }
+  

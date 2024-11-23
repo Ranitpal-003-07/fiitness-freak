@@ -11,16 +11,18 @@ const NavLink = ({ to, children, onClick, className }) => {
       <Link
         to={to}
         onClick={onClick}
-        onMouseEnter={() => setIsHovered(true)} // Handle hover start
-        onMouseLeave={() => setIsHovered(false)} // Handle hover end
+        onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)} 
         style={{
           color: isActive
             ? "#9292ff"
             : isHovered
-            ? "aliceblue" // Change color on hover
-            : "#000060",
-          fontWeight: isActive ? "900" : "700",
-          textDecoration: "none", // Remove underline
+            ? "orange" 
+            : "navy",
+          fontWeight: isActive ? "900" : isHovered
+          ? "800" 
+          : "500",
+          textDecoration: "none", 
           transition: "color 0.3s ease", // Smooth transition
         }}
       >

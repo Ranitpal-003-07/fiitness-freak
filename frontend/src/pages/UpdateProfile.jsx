@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import '../Styles/UpdateProfile.css'
 
 const UpdateProfile = () => {
   const { user, login } = useAuth();
@@ -79,120 +80,89 @@ const UpdateProfile = () => {
     }
   };
 
-  const inputClasses =
-    "mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out";
-
   return (
     <motion.div
-      className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8 flex items-center justify-center"
+      className="motion-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
+      <div className="form-wrapper">
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-center text-4xl font-bold text-gray-800 mb-8">Update Your Profile</h2>
+          <h2>Update Your Profile</h2>
         </motion.div>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Name Field */}
+        <form onSubmit={handleSubmit}>
+          <div className="grid-container">
             <div>
-              <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-1">
-                Name
-              </label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                className={inputClasses}
                 value={formData.name}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-lg font-medium text-gray-700 mb-1">
-                Email Address
-              </label>
+              <label htmlFor="email">Email Address</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className={`${inputClasses} bg-gray-100`}
                 value={formData.email}
                 readOnly
               />
             </div>
 
-            {/* Profile Image */}
-            <div>
-              <label htmlFor="profileImage" className="block text-lg font-medium text-gray-700 mb-1">
-                Profile Image
-              </label>
-              <div className="flex items-center space-x-4">
-                {previewImage && (
-                  <img
-                    src={previewImage}
-                    alt="Preview"
-                    className="w-16 h-16 rounded-full object-cover border border-gray-300"
-                  />
-                )}
-                <input
-                  type="file"
-                  id="profileImage"
-                  name="profileImage"
-                  accept="image/*"
-                  className={inputClasses}
-                  onChange={handleChange}
+            <div className="profile-image-upload">
+              {previewImage && (
+                <img
+                  src={previewImage}
+                  alt="Preview"
                 />
-              </div>
+              )}
+              <input
+                type="file"
+                id="profileImage"
+                name="profileImage"
+                accept="image/*"
+                onChange={handleChange}
+              />
             </div>
 
-            {/* Height */}
             <div>
-              <label htmlFor="height" className="block text-lg font-medium text-gray-700 mb-1">
-                Height (cm)
-              </label>
+              <label htmlFor="height">Height (cm)</label>
               <input
                 type="number"
                 id="height"
                 name="height"
-                className={inputClasses}
                 value={formData.height}
                 onChange={handleChange}
               />
             </div>
 
-            {/* Weight */}
             <div>
-              <label htmlFor="weight" className="block text-lg font-medium text-gray-700 mb-1">
-                Weight (kg)
-              </label>
+              <label htmlFor="weight">Weight (kg)</label>
               <input
                 type="number"
                 id="weight"
                 name="weight"
-                className={inputClasses}
                 value={formData.weight}
                 onChange={handleChange}
               />
             </div>
 
-            {/* Gender */}
             <div>
-              <label htmlFor="gender" className="block text-lg font-medium text-gray-700 mb-1">
-                Gender
-              </label>
+              <label htmlFor="gender">Gender</label>
               <select
                 id="gender"
                 name="gender"
-                className={inputClasses}
                 value={formData.gender}
                 onChange={handleChange}
               >
@@ -203,61 +173,41 @@ const UpdateProfile = () => {
               </select>
             </div>
 
-            {/* Age */}
             <div>
-              <label htmlFor="age" className="block text-lg font-medium text-gray-700 mb-1">
-                Age
-              </label>
+              <label htmlFor="age">Age</label>
               <input
                 type="number"
                 id="age"
                 name="age"
-                className={inputClasses}
                 value={formData.age}
                 onChange={handleChange}
               />
             </div>
 
-            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-lg font-medium text-gray-700 mb-1">
-                New Password (Optional)
-              </label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
                 name="password"
-                className={inputClasses}
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
 
-            {/* Confirm Password */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-lg font-medium text-gray-700 mb-1">
-                Confirm New Password
-              </label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                className={inputClasses}
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
             </div>
           </div>
 
-          <div className="text-right">
-            <motion.button
-              type="submit"
-              className="py-3 px-6 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"
-              whileTap={{ scale: 0.95 }}
-            >
-              Update Profile
-            </motion.button>
-          </div>
+          <button type="submit">Update Profile</button>
         </form>
       </div>
     </motion.div>
