@@ -35,8 +35,8 @@ const WorkoutDatabase = () => {
   };
 
   return (
-    <div className="container">
-      <div className="search-container">
+    <div className="workout-container">
+      <div className="wsearch-container">
         <h1 className="title">Search For A Perfect Exercise</h1>
         <div className="search-bar">
           <select
@@ -56,7 +56,7 @@ const WorkoutDatabase = () => {
             <option value="upper%20legs">Upper Legs</option>
             <option value="waist">Waist</option>
           </select>
-          <button onClick={handleSearch} className="search-button">
+          <button onClick={handleSearch} className="search-button1">
             Search
           </button>
         </div>

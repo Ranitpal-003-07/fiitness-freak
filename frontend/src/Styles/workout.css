@@ -1,5 +1,5 @@
 /* Container */
-.container {
+.workout-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -10,6 +10,7 @@
     margin-top:4rem ;
     background: linear-gradient(black, rgb(37, 34, 34), rgb(90, 80, 80), rgb(83, 50, 50));
     color: white;
+    min-height: 80vh;
   }
   
   /* Title */
@@ -21,7 +22,7 @@
   }
   
   /* Search Bar */
-  .search-container {
+  .wsearch-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +32,7 @@
   
   .search-bar {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
   }
   
@@ -49,7 +50,9 @@
     background-color: rgba(240, 248, 255, 0.167);
   }
 
-  .search-button {
+  .search-button1 {
+    position: relative;
+    top: -1.2rem;
     padding: 0.75rem 1.5rem;
     background-color: rgb(94, 219, 16);
     color: white;
@@ -61,7 +64,7 @@
     transition: background-color 0.3s;
   }
   
-  .search-button:hover {
+  .search-button1:hover {
     background-color: darkgreen;
   }
   

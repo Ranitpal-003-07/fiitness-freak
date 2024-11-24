@@ -16,6 +16,7 @@ import WaterIntake from "./WaterIntake";
 import { useAuth } from "../context/AuthContext";
 import UpdateProfile from "./UpdateProfile";
 import WorkoutDetails from "./WorkoutDetails";
+import PrivateRoute from "./PrivateRoute";
 const Home = () => {
   const { isAuthenticated } = useAuth(); // Get the authentication status
 
@@ -42,6 +43,13 @@ const Home = () => {
           element={isAuthenticated ? <Navigate to="/" /> : <Register />}
         />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
+        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+          <Route path="/profile" element={<ProfileLayout />}>
+            <Route path="update-profile" element={<UpdateProfile />} />
+            <Route path="workout-details" element={<WorkoutDetails/>} />
+          </Route>
+        </Route>
       </Routes>
     </div>
   );

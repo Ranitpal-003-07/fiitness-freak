@@ -59,7 +59,7 @@ const NutritionChecker = () => {
           />
           <button
             onClick={handleSearch}
-            className="search-button"
+            className="search-button2"
           >
             Search
           </button>
