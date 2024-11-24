@@ -159,5 +159,8 @@ left: 1rem;
   .navbar{
     height: 4rem;
   }
+  .profil{
+    display: none;
+  }
 
 }

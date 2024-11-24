@@ -74,13 +74,13 @@ const Main = () => {
             </div>
           </div>
           <div className="hero-btns">
-            <buttons className="btn">Get Started</buttons>
-            <buttons className="btn">Learn More</buttons>
+            <button className="btn">Get Started</button>
+            <button className="btn">Learn More</button>
           </div>
         </div>
         <div className="right-h">
 
-          <buttons className="btn">Join now</buttons>
+          <button className="btn">Join now</button>
           <div className="heart-rate">
             <img src={heart} alt="" />
             <span>Heart Rate</span><span>116 BPM</span>
@@ -143,7 +143,7 @@ const Main = () => {
       <div className="photogal">
         <div className="left-pg">
           <span>Photo Gallery</span>
-          <div class="album">
+          <div className="album">
             <div className="responsive-container-block bg">
               <div className="responsive-container-block img-cont">
                 <img className="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.4.svg"/>
@@ -154,10 +154,10 @@ const Main = () => {
                 <img className="img img-big" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.11.svg"/>
                 <img className="img img-big img-last" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.10.svg"/>
               </div>
-              <div class="responsive-container-block img-cont">
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.7.svg"/>
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.8.svg"/>
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.9.svg"/>
+              <div className="responsive-container-block img-cont">
+                <img className="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.7.svg"/>
+                <img className="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.8.svg"/>
+                <img className="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.9.svg"/>
               </div>
             </div>
           </div>

@@ -10,10 +10,9 @@ import WorkoutDatabase from "./WorkoutDatabase";
 import NutritionChecker from "./NutritionChecker";
 import BmrCalculator from "./BmrCalculator";
 import VerifyEmail from "./VerifyEmail";
-import ProfileLayout from "./ProfileLayout"; // Layout for private routes
-import MealPlan from "./MealPlan"; // Private Route Example
-import WaterIntake from "./WaterIntake"; // Private Route Example
-import PrivateRoute from "./PrivateRoute"; // Import the PrivateRoute component
+import ProfileLayout from "./ProfileLayout";
+import MealPlan from "./MealPlan";
+import WaterIntake from "./WaterIntake"; 
 import { useAuth } from "../context/AuthContext";
 import UpdateProfile from "./UpdateProfile";
 import WorkoutDetails from "./WorkoutDetails";
@@ -31,7 +30,7 @@ const Home = () => {
         <Route path="/WorkoutDatabase" element={<WorkoutDatabase />} />
         <Route path="/NutritionChecker" element={<NutritionChecker />} />
         <Route path="/BmrCalculator" element={<BmrCalculator />} />
-        
+        <Route path="/profile" element={<ProfileLayout />} />
 
         {/* Auth Routes */}
         <Route
@@ -43,16 +42,6 @@ const Home = () => {
           element={isAuthenticated ? <Navigate to="/" /> : <Register />}
         />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
-
-        {/* Private Routes */}
-        <Route path="/profile" element={<PrivateRoute />}>
-          <Route element={<ProfileLayout />}>
-            <Route path="update-profile" element={<UpdateProfile />} />
-            <Route path="workout-details" element={<WorkoutDetails />} />
-            <Route path="meal-plan" element={<MealPlan />} />
-            <Route path="water-intake" element={<WaterIntake />} />
-          </Route>
-        </Route>
       </Routes>
     </div>
   );

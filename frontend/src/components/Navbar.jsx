@@ -56,7 +56,7 @@ const Navbar = () => {
            style={{display:isAuthenticated?"":"none"}}
           >
           <img src="" alt="" className="userimg" />
-          <p className="username">{isAuthenticated?user.name:"user"}</p>
+          {/* <p className="username">{isAuthenticated?user.name:"user"}</p> */}
           </div>
           <NavLink to="/" className="nav-link2" onClick={toggleMenu}>
             Home
