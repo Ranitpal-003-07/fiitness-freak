@@ -86,13 +86,13 @@ const SignIn = () => {
 
   return (
    <>
-     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
-      <div className="forms-container">
-        <div className="signin-signup">
+     <div className={`customcontainer ${isSignUpMode ? "sign-up-mode" : ""}`}>
+      <div className="cforms-container">
+        <div className="csignin-signup">
           {/* Sign In Form */}
-          <form onSubmit={handleSubmit2} className="sign-in-form">
-            <h2 className="title">Sign in</h2>
-            <div className="input-field">
+          <form onSubmit={handleSubmit2} className="csign-in-form">
+            <h2 className="ctitle">Sign in</h2>
+            <div className="cinput-field">
               <i className="fas fa-user"></i>
               <input type="email"
               value={email2}
@@ -100,7 +100,7 @@ const SignIn = () => {
               placeholder="Email"
               required />
             </div>
-            <div className="input-field">
+            <div className="cinput-field">
               <i className="fas fa-lock"></i>
               <input  type={showPassword ? "text" : "password"}
               value={password2}
@@ -109,7 +109,7 @@ const SignIn = () => {
               required />
                <span
               onClick={() => setShowPassword(!showPassword)}
-              className="cursor-pointer eye"
+              className="cursor-pointer ceye"
             >
               {showPassword ? (
                 <FontAwesomeIcon icon={faEyeSlash} size="lg" />
@@ -119,34 +119,34 @@ const SignIn = () => {
             </span>
             </div>
             <input type="submit" value={`${loading ? "Signing In..." : "Sign In"}`} className="btn solid" />
-            <p className="social-text">Or Sign in with social platforms</p>
-            <div className="social-media">
-              <a href="#" className="social-icon">
+            <p className="csocial-text">Or Sign in with social platforms</p>
+            <div className="csocial-media">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-google"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
           </form>
 
-          <form onSubmit={handleSubmit} className="sign-up-form">
-            <h2 className="title">Sign up</h2>
-            <div className="input-field">
+          <form onSubmit={handleSubmit} className="csign-up-form">
+            <h2 className="ctitle">Sign up</h2>
+            <div className="cinput-field">
               <i className="fas fa-user"></i>
-              <input type="text" 
+              <input type="ctext" 
                value={name}
                onChange={(e) => setName(e.target.value)}
                placeholder="Name"
                required />
             </div>
-            <div className="input-field">
+            <div className="cinput-field">
               <i className="fas fa-envelope"></i>
               <input type="email"
               value={email}
@@ -155,7 +155,7 @@ const SignIn = () => {
               required
               />
             </div>
-            <div className="input-field">
+            <div className="cinput-field">
               <i className="fas fa-lock"></i>
               <input
                type={showPassword ? "text" : "password"}
@@ -165,7 +165,7 @@ const SignIn = () => {
                required />
                 <span
               onClick={() => setShowPassword(!showPassword)}
-              className="cursor-pointer eye"
+              className="cursor-pointer ceye"
             >
               {showPassword ? (
                 <FontAwesomeIcon icon={faEyeSlash} size="lg" />
@@ -174,7 +174,7 @@ const SignIn = () => {
               )}
             </span>
             </div>
-            <div className="input-field">
+            <div className="cinput-field">
               <i className="fas fa-lock"></i>
               <input
                type={showConfirmPassword ? "text" : "password"}
@@ -185,7 +185,7 @@ const SignIn = () => {
                />
                <span
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="cursor-pointer eye"
+              className="cursor-pointer ceye"
             >
               {showConfirmPassword ? (
                 <FontAwesomeIcon icon={faEyeSlash} size="lg" />
@@ -195,18 +195,18 @@ const SignIn = () => {
             </span>
             </div>
             <input type="submit" className="btn" value="Sign up" />
-            <p className="social-text">Or Sign up with social platforms</p>
-            <div className="social-media">
-              <a href="#" className="social-icon">
+            <p className="csocial-text">Or Sign up with social platforms</p>
+            <div className="csocial-media">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-google"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a href="#" className="csocial-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
@@ -215,9 +215,9 @@ const SignIn = () => {
       </div>
 
       {/* Panels */}
-      <div className="panels-container">
-        <div className="panel left-panel">
-          <div className="content">
+      <div className="cpanels-container">
+        <div className="cpanel cleft-panel">
+          <div className="ccontent">
           <Lottie
               animationData={bannerAnimation}
               style={{margin:"0",padding:"0"}}
@@ -225,8 +225,7 @@ const SignIn = () => {
             />
             <h3>New here ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Get Shreded With our premium plan
             </p>
             <button
               className="btn transparent"
@@ -237,16 +236,15 @@ const SignIn = () => {
             </button>
           </div>
         </div>
-        <div className="panel right-panel">
-          <div className="content">
+        <div className="cpanel cright-panel">
+          <div className="ccontent">
           <Lottie
             animationData={bannerAnimation2}
             style={{margin:"0",padding:"0"}}
           />
             <h3>One of us ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Access to Merchs, Gym gears and many more
             </p>
             <button
               className="btn transparent"

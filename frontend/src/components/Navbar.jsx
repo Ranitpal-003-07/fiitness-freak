@@ -5,6 +5,8 @@ import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import NavLink from "../components/NavLink"; // Import NavLink
 import "../Styles/Navbar.css";
+import gymlogo from '../assets/aimfit-logo.png'
+import monster from '../assets/monster.png'
 
 
 const Navbar = () => {
@@ -25,7 +27,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
        <div className="nav-logo">
-        Aimfit
+        <img src={gymlogo} alt="" />
        </div>
        <div className="navbar-content">
         <div className="desktop-links">
@@ -56,7 +58,7 @@ const Navbar = () => {
            style={{display:isAuthenticated?"":"none"}}
           >
           <img src="" alt="" className="userimg" />
-          {/* <p className="username">{isAuthenticated?user.name:"user"}</p> */}
+          <p className="username">{isAuthenticated?user!==null?user.name:"user":"user"}</p>
           </div>
           <NavLink to="/" className="nav-link2" onClick={toggleMenu}>
             Home
@@ -105,8 +107,17 @@ const Navbar = () => {
            style={{display:isAuthenticated?"":"none"}}
            >
             <NavLink to="/profile" className="nav-link5" >
-              <img src="" alt="img" className="userimg2" />
+              <img src={monster} alt="img" className="userimg2" />
             </NavLink>
+            <button
+              onClick={() => {
+              logout();
+              }}
+              className="logout2"
+
+            >
+              <FiLogOut size={25} className="" />
+            </button>
           </div>
         </div>
        </div>

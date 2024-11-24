@@ -28,18 +28,17 @@ const Programs = () => {
  
   return (
    <>
-   <section>
-    <div className="container">
-      <div className="hero_wrapper">
+    <div className="pcontainer">
+      <div className="phero_wrapper">
         <div className="hero_content">
           <h2 className="section_title">Exercise is a key to  
               <span className="highlight">HEALTHY</span> 
               LifeStyle
           </h2>
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam aliquid nemo in repellendus</p>
-          <div className="btns">
-            <button className="watch_btn">
-            <button className="register_btn">Get Started</button>
+          <div className="pbtns">
+            <button className="pwatch_btn">
+            <button className="pregister_btn">Get Started</button>
               <div className="wbtn"><svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#B197FC" d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>
               <p>Watch Video</p>
               </div>
@@ -47,8 +46,8 @@ const Programs = () => {
 
           </div>
         </div>
-        <div className="hero_img">
-          <div className="hero_img_wrapper">
+        <div className="phero_img">
+          <div className="phero_img_wrapper">
             <div className="box01">
               <div className="box02">
                 <div className="box03">
@@ -253,7 +252,6 @@ const Programs = () => {
             </div>
         </div>
     
-   </section>
    </>
   );
 };

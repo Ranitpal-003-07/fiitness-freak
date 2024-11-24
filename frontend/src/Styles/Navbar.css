@@ -12,9 +12,15 @@
 }
 .nav-logo{
 position: absolute;
-top: 1rem;
+top: .2rem;
 left: 1rem;
 }
+
+.nav-logo img{
+  width: 9rem;
+  height: 3rem;
+}
+
 .navbar-content{
   display: flex;
   margin: 0rem 1rem;
@@ -35,7 +41,7 @@ left: 1rem;
   margin: 0;
   display: none;
   position: absolute;
-  right:2rem;
+  right:5rem;
   top: .5rem;
   background-color: rgba(255, 194, 214, 0.788);
   color: whitesmoke;
@@ -46,7 +52,7 @@ left: 1rem;
 .mbl-menu{
   position: absolute;
   top: 4rem;
-  right: 0rem;
+  right: 4rem;
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 214, 228);
@@ -121,7 +127,7 @@ left: 1rem;
  
 .desktop-menu{
   position: absolute;
-  right: 0rem;
+  right: 4rem;
   display: flex;
 }
 
@@ -137,13 +143,27 @@ left: 1rem;
 
 .profil{
   display: flex;
+  position: absolute;
+  top: -1rem;
+  right: .5rem;
 }
 
 .nav-link5{
-  background-color: black;
-  position: absolute;
-  top: 0;
-  right: 0;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  padding: .3rem;
+}
+
+.nav-link5 img{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logout2{
+  width: 4rem;
+  height: 3rem;
+  margin: .2rem 1rem;
+  padding: 0;
 }
 
 
