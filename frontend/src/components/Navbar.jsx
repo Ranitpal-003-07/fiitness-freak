@@ -56,7 +56,7 @@ const Navbar = () => {
            style={{display:isAuthenticated?"":"none"}}
           >
           <img src="" alt="" className="userimg" />
-          {/* <p className="username">{isAuthenticated?user.name:"user"}</p> */}
+          <p className="username">{isAuthenticated?user.name:"user"}</p>
           </div>
           <NavLink to="/" className="nav-link2" onClick={toggleMenu}>
             Home
@@ -70,7 +70,10 @@ const Navbar = () => {
           <NavLink to="/Programs" className="nav-link2" onClick={toggleMenu}>
             Programs
           </NavLink>
-          <div className="logreg">
+          <div className="logreg"
+            style={{display:isAuthenticated?"none":""}}
+
+          >
             <NavLink to="/SignIn" className="nav-link3" onClick={toggleMenu}>Log-In</NavLink>
             <hr className="line1" />
             <NavLink to="/Register" className="nav-link3" onClick={toggleMenu}>Sign-Up</NavLink>
